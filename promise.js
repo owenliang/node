@@ -137,5 +137,95 @@ var promise6 = new Promise(
     }
 );
 
+// .then()隐式包装resolved Promise
+var promise7 = new Promise(
+    (resolve, reject) => {
+        var promise7_1 = new Promise(
+            (resolve, reject) => {
+                console.log("promise7_1 starts");
+                setTimeout(
+                    () => {
+                        resolve("this is promise7_1 resolve");
+                    },
+                    2000
+                );
+            }
+        );
+        resolve(promise7_1);
+    }
+).then(
+    (msg) => {
+        console.log(msg);
+        return "promise7 .then()隐式包装resolved Promise";
+    },
+    (err) => {
+        console.log(err);
+    }
+).then(
+    (word) => {
+        console.log(word);
+    }
+);
+
+// .then()显式包装resolved Promise
+var promise8 = new Promise(
+    (resolve, reject) => {
+        var promise8_1 = new Promise(
+            (resolve, reject) => {
+                console.log("promise8_1 starts");
+                setTimeout(
+                    () => {
+                        resolve("this is promise8_1 resolve");
+                    },
+                    2000
+                );
+            }
+        );
+        resolve(promise8_1);
+    }
+).then(
+    (msg) => {
+        console.log(msg);
+        return Promise.resolve("promise8 .then()显式包装resolved Promise");
+    },
+    (err) => {
+        console.log(err);
+    }
+).then(
+    (word) => {
+        console.log(word);
+    }
+);
+
+// .then()显式包装rejected Promise
+var promise9 = new Promise(
+    (resolve, reject) => {
+        var promise9_1 = new Promise(
+            (resolve, reject) => {
+                console.log("promise9_1 starts");
+                setTimeout(
+                    () => {
+                        resolve("this is promise9_1 resolve");
+                    },
+                    2000
+                );
+            }
+        );
+        resolve(promise9_1);
+    }
+).then(
+    (msg) => {
+        console.log(msg);
+        return Promise.reject("promise9 .then()显式包装rejected Promise");
+    },
+    (err) => {
+        console.log(err);
+    }
+).catch(
+    (word) => {
+        console.log(word);
+    }
+);
+
 // node在这里才开始执行event loop，timer都在此开始等待调度
 
