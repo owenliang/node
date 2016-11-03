@@ -69,7 +69,7 @@ var promise4 = new Promise(
 // 链式resolve
 var promise5 = new Promise(
     (resolve, reject) => {
-        var promise4_1 = new Promise(
+        var promise5_1 = new Promise(
             (resolve, reject) => {
                 console.log("promise5_1 starts");
                 setTimeout(
@@ -80,7 +80,7 @@ var promise5 = new Promise(
                 );
             }
         );
-        resolve(promise4_1);
+        resolve(promise5_1);
     }
 ).then(
     (msg) => {
